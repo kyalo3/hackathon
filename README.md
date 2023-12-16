@@ -11,6 +11,7 @@ python -m venv venv
 </li>
 
 <li> activate your envnvironment
+  
   ```shell
   env\Scripts\activate.bat
   ```
