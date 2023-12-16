@@ -13,7 +13,7 @@ python -m venv venv
 <li> activate your envnvironment
   
   ```shell
-  env\Scripts\activate.bat
+  venv\Scripts\activate.bat
   ```
 </li>
 <li>Clone repo on your machine ( if you fork it on your github account clone yours )
