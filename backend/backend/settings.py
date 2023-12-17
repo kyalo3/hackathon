@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # my apps
+    "post",
     
     'users.apps.UsersConfig',
     
     # Third Party apps
     "rest_framework",
+    "taggit",
 ]
 
 REST_FRAMEWORK = {
