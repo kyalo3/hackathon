@@ -1,6 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager  
 from django.shortcuts import get_object_or_404
+from users.models import CustomUser
 
 
 def upload_to(instance,filename):
@@ -14,7 +15,7 @@ class Post(models.Model):
 
     created_at=models.DateTimeField(auto_now_add=True,null=True)
     edited_at=models.DateTimeField(auto_now=True)
-    # user=models.ForeignKey(User ,on_delete=models.CASCADE,null=True,related_name='user_posts')
+    user=models.ForeignKey(CustomUser ,on_delete=models.CASCADE,null=True,related_name='user_posts')
 
     class Meta:
         ordering = ['-created_at']
@@ -42,7 +43,7 @@ class Comment(models.Model):
     created_at=models.DateTimeField(auto_now_add=True,null=True)
 
     post=models.ForeignKey(Post ,on_delete=models.CASCADE,null=True,related_name='post_comments')
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
@@ -54,7 +55,7 @@ class Comment(models.Model):
 class Reply(models.Model):
     reply_post=models.ForeignKey(Post ,on_delete=models.CASCADE,null=True,related_name='re_post')
     comment=models.ForeignKey(Comment, related_name='replies', on_delete=models.CASCADE)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
     content=models.TextField(max_length=500)
     created_at=models.DateTimeField(auto_now_add=True,null=True)

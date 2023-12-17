@@ -1,7 +1,7 @@
 
 from rest_framework import generics
 from .models import Post,Comment,Reply
-from .serializers import PostSerializer,PostSerializerUpdateAndCreate,PostImageUploadSerializer,CommentSerializer,ReplySerializer
+from .serializers import PostSerializer,PostSerializerCreate,PostImageUploadSerializer,CommentSerializer,ReplySerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser,AllowAny,IsAuthenticated,BasePermission
 from django.shortcuts import get_object_or_404
@@ -14,36 +14,13 @@ from rest_framework import viewsets
 
 class PostCreate(generics.CreateAPIView):
     queryset=Post.objects.all()
-    serializer_class=PostSerializerUpdateAndCreate
+    serializer_class=PostSerializerCreate
  
     
 class PostList(generics.ListAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializer
-    
-
-
-
-    
-    
-
-#used to update some fields inside post table  
-class ProductUpdate(generics.UpdateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializerUpdateAndCreate
-    lookup_field = 'pk'
-
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "post updated successfully"})
-
-        else:
-            return Response({"message": "failed", "details": serializer.errors})
-          
+              
 
     
     
@@ -65,24 +42,42 @@ class ImageUploadViewSet(viewsets.ModelViewSet):
     
 
 
-class CommentCreate(generics.CreateAPIView):
+class CommentCreateView(generics.CreateAPIView):
     queryset=Comment.objects.all()
     serializer_class=CommentSerializer
     
-class CommentList(generics.ListAPIView):
+class CommentListView(generics.ListAPIView):
     queryset=Comment.objects.all()
     serializer_class=CommentSerializer
+    lookup_field = 'user_comment'
+    def get_queryset(self):
+            
+        id =self.kwargs.get(self.lookup_field)
+
+        # And use it as you wish in the filtering below:
+
+        return CommentSerializer.objects.filter(user_comment=id)
     
 
 
-class ReplyCreate(generics.CreateAPIView):
+class ReplyCreateView(generics.CreateAPIView):
     queryset=Reply.objects.all()
     serializer_class=ReplySerializer
+    
  
     
-class ReplyList(generics.ListAPIView):
+class ReplyListView(generics.ListAPIView):
     queryset=Reply.objects.all()
     serializer_class=ReplySerializer
+    lookup_field = 'user_reply'
+    def get_queryset(self):
+        
+        id =self.kwargs.get(self.lookup_field)
+
+        # And use it as you wish in the filtering below:
+
+        return ReplySerializer.objects.filter(user_reply=id)
+    
 
     
     

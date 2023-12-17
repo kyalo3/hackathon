@@ -14,6 +14,7 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
     path("admin/", admin.site.urls),
     path("api/", include("users.urls")),
+    path("post_api/", include("post.urls")),
 ]
 
 if settings.DEBUG:

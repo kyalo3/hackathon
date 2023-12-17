@@ -6,16 +6,16 @@ class PostSerializer(serializers.ModelSerializer):
     id=serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model=Post
-        fields=('id','title','content','tags','image','created_at','edited_at')
+        fields=('id','title','content','tags','image','created_at','edited_at','user')
         
 
-class PostSerializerUpdateAndCreate(serializers.ModelSerializer):
+class PostSerializerCreate(serializers.ModelSerializer):
     """ this serializer for post model  for list and view"""
     "N.B: doesnot contain image since image has its own serrializer"
     id=serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model=Post
-        fields=('id','title','content','tags','created_at','edited_at')
+        fields=('id','title','content','tags','created_at','edited_at','user')
         
 
         
@@ -35,7 +35,7 @@ class CommentSerializer(serializers.ModelSerializer):
     id=serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model=Comment
-        fields=('id','content','created_at','post')
+        fields=('id','content','created_at','post','user')
         
  
 class ReplySerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class ReplySerializer(serializers.ModelSerializer):
     id=serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model=Reply
-        fields=('id','reply_post','content','comment','created_at')
+        fields=('id','reply_post','content','comment','created_at','user')
         
         
        
