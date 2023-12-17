@@ -1,7 +1,7 @@
 
 from rest_framework import generics
 from .models import Post,Comment,Reply
-from .serializers import PostSerializer,PostSerializerCreate,PostImageUploadSerializer,CommentSerializer,ReplySerializer
+from .serializers import PostSerializer,PostSerializerCreate,PostImageUploadSerializer,CommentSerializer,ReplySerializer,PostSerializerCreatetag
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser,AllowAny,IsAuthenticated,BasePermission
 from django.shortcuts import get_object_or_404
@@ -15,14 +15,18 @@ from rest_framework import viewsets
 class PostCreate(generics.CreateAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializerCreate
+   
+           
+   
  
     
 class PostList(generics.ListAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializer
               
-
-    
+class PostCreatetag(generics.CreateAPIView):
+    queryset=Post.objects.all()
+    serializer_class=PostSerializerCreatetag
     
 """ image view"""
 

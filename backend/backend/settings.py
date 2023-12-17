@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Third Party apps
     "rest_framework",
     "taggit",
+    'taggit_serializer',
 ]
 
 REST_FRAMEWORK = {
@@ -188,3 +189,7 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# TAGGIT_TAGS_FROM_STRING = 'post.utils.custom_tag_string'
+

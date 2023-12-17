@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import ImageUploadViewSet,PostCreate,PostList,ReplyCreateView,ReplyListView,CommentCreateView,CommentListView
+from .views import ImageUploadViewSet,PostCreate,PostList,ReplyCreateView,ReplyListView,CommentCreateView,CommentListView,PostCreatetag
 from rest_framework.routers import DefaultRouter
 app_name='post'
 
@@ -11,7 +11,8 @@ urlpatterns = [
  
     # posts all endpoints
     path('post/all',PostList.as_view(),name='list_posts'),
-    path('product/create',PostCreate.as_view(),name='post_add'),
+    path('post/create',PostCreate.as_view(),name='post_add'),
+    path('tag/create',PostCreatetag.as_view(),name='tag_add'),
     # posts all endpoints
     path('comment/create',CommentCreateView.as_view(),name='comment_add'),
     path('comment/list/<int:user_comment>',CommentListView.as_view(),name='comment_list'),
