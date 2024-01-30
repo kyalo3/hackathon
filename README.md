@@ -1,4 +1,4 @@
-# hackathon
+## hackathon
 <h1>Hackthon For MLH cooperation with All In Africa Project</h1>
 
 <h2>Getting started</h2>
